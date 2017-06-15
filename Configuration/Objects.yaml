@@ -1,0 +1,2 @@
+TYPO3\Form\Persistence\FormPersistenceManagerInterface:
+  className: UpAssist\FormEnhancers\Form\Persistence\YamlPersistenceManager
