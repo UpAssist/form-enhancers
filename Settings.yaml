@@ -1,0 +1,7 @@
+TYPO3:
+  Form:
+    presets:
+      default:
+        finisherPresets:
+          'UpAssist.FormEnhancers:Email':
+            implementationClassName: UpAssist\FormEnhancers\Finishers\EmailFinisher

@@ -1,0 +1,19 @@
+{
+  "name": "upassist/form-enhancers",
+  "type": "typo3-flow-package",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Henjo Hoeksma",
+      "email": "henjo@upassist.com"
+    }
+  ],
+  "require": {
+    "neos/form": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "UpAssist\\FormEnhancers": "Classes"
+    }
+  }
+}
