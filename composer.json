@@ -13,7 +13,7 @@
   },
   "autoload": {
     "psr-4": {
-      "UpAssist\\FormEnhancers": "Classes"
+      "UpAssist\\FormEnhancers\\": "Classes"
     }
   }
 }
