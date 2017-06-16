@@ -4,4 +4,6 @@ TYPO3:
       default:
         finisherPresets:
           'UpAssist.FormEnhancers:Email':
-            implementationClassName: UpAssist\FormEnhancers\Finishers\EmailFinisher
+            implementationClassName: 'UpAssist\FormEnhancers\Finishers\EmailFinisher'
+          'UpAssist.FormEnhancers:Redirect':
+            implementationClassName: 'UpAssist\FormEnhancers\Finishers\NodeRedirectFinisher'
