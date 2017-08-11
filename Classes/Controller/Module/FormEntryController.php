@@ -79,29 +79,31 @@ class FormEntryController extends AbstractModuleController
 
         if ($singleEntry instanceof FormEntry) {
             foreach ($singleEntry->getFormValues() as $key => $value) {
-                $columns[] = $key;
+                $columns[] =[ucfirst($key), $key];
             }
         }
 
-        array_push($columns, 'Created at');
+        array_push($columns, ['Created','creationDateTime']);
+
         $objPHPExcel = new \PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
 
         $rowCounter = 1;
         foreach ($columns as $column => $config) {
             $objPHPExcel->getActiveSheet()->setCellValue(chr(65 + $column) . $rowCounter, $config[0]);
-//			$objPHPExcel->getActiveSheet()->getColumnDimension($column)->setAutoSize(TRUE);
+			$objPHPExcel->getActiveSheet()->getColumnDimension(\PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(TRUE);
         }
+
 
         $rowCounter = 2;
 
         $this->formEntryRepository->setDefaultOrderings(['creationDateTime' => QueryInterface::ORDER_DESCENDING]);
         foreach ($this->formEntryRepository->findAll() as $formEntry) {
             foreach ($columns as $column => $config) {
-                $cellValue = ObjectAccess::getPropertyPath($formEntry, $config[1]);
+                $cellValue = ObjectAccess::getPropertyPath($formEntry->getFormValues(), $config[1]) ? ObjectAccess::getPropertyPath($formEntry->getFormValues(), $config[1]) : ObjectAccess::getPropertyPath($formEntry, $config[1]);
 
                 if ($cellValue instanceof \DateTime) {
-                    $cellValue = $cellValue->format('d-m-Y H:i:s');
+                    $cellValue = $cellValue->format('d-m-Y H:i');
                 }
 
                 $objPHPExcel->getActiveSheet()->setCellValue(
@@ -119,11 +121,11 @@ class FormEntryController extends AbstractModuleController
         }
 
         // Rename sheet
-        $objPHPExcel->getActiveSheet()->setTitle('Orders');
+        $objPHPExcel->getActiveSheet()->setTitle('Form entries');
 
         // Redirect output to a client’s web browser (Excel5)
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="orders.xls"');
+        header('Content-Disposition: attachment;filename="form_entries.xls"');
         header('Cache-Control: max-age=0');
 
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
