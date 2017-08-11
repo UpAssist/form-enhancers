@@ -14,6 +14,13 @@ use TYPO3\Flow\Persistence\Repository;
  */
 class FormEntryRepository extends Repository
 {
+    /**
+     * @return object
+     */
+    public function getFirst() {
+        $query = $this->createQuery();
+        return $query->execute()->getFirst();
+    }
 
     /**
      * Persist all

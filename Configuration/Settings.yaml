@@ -9,3 +9,13 @@ TYPO3:
             implementationClassName: 'UpAssist\FormEnhancers\Finishers\NodeRedirectFinisher'
           'UpAssist.FormEnhancers:StoreFormEntry':
             implementationClassName: 'UpAssist\FormEnhancers\Finishers\FormEntryFinisher'
+  Neos:
+    modules:
+      management:
+        submodules:
+          formEntries:
+            label: 'Form entries'
+            controller: \UpAssist\FormEnhancers\Controller\Module\FormEntryController
+            description: 'Form entries'
+            icon: icon-table
+            privilegeTarget: 'UpAssist.FormEnhancers:ModuleControllerActions'

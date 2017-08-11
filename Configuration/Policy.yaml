@@ -1,0 +1,19 @@
+# Formbuilder ACL's
+privilegeTargets:
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'UpAssist.FormEnhancers:ControllerActions':
+      matcher: 'method(UpAssist\FormEnhancers\(Form)Controller->.*Action())'
+    'UpAssist.FormEnhancers:ModuleControllerActions':
+      matcher: 'method(UpAssist\FormEnhancers\Controller\Module\FormEntryController->.*Action())'
+
+roles:
+  'TYPO3.Neos:Editor':
+    privileges:
+      -
+        privilegeTarget: 'UpAssist.FormEnhancers:ModuleControllerActions'
+        permission: GRANT
+#  'TYPO3.Flow:Anonymous':
+#    privileges:
+#      -
+#        privilegeTarget: 'UpAssist.FormEnhancers:ModuleControllerActions'
+#        permission: GRANT

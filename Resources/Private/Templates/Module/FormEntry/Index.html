@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (c) 2017. UpAssist
+  ~ For more information http://www.upassist.com
+  -->
+
+<f:layout name="BackendModule"/>
+
+<f:section name="content">
+    <f:if condition="{entries}">
+        <f:then>
+            <table class="neos-table">
+                <thead>
+                <tr>
+                    <th style="text-align: center" width="100"><i class="icon-trash"></i></th>
+                    <f:for each="{labels}" as="label">
+                        <th>{label -> f:format.case(mode: 'capital')}</th>
+                    </f:for>
+                    <td>Created</td>
+                </tr>
+                </thead>
+                <f:for each="{entries}" as="entry">
+                    <tr>
+                        <td>
+                            <f:form action="delete" controller="FormEntry" package="UpAssist/FormEnhancers"
+                                    subpackage="Module" arguments="{formEntry:entry}">
+                                <f:form.submit class="neos-button neos-button-danger" value="Delete"/>
+                            </f:form>
+                        </td>
+                        <f:for each="{entry.formValues}" as="value">
+                            <td>{value -> f:format.raw()}</td>
+                        </f:for>
+                        <td>{entry.creationDateTime -> f:format.date(format: 'Y-m-d H:i')}</td>
+                    </tr>
+                </f:for>
+            </table>
+            </div>
+            <div class="neos-footer">
+
+                <div class="neos-button-toolbar">
+                    <f:form action="export" controller="FormEntry" subpackage="Module" package="UpAssist/FormEnhancers" format="xls"
+                            style="display:inline;">
+                        <f:form.submit value="Export" class="neos-button neos-button-primary"/>
+                    </f:form>
+                    <f:form action="deleteAll" controller="FormEntry" package="UpAssist/FormEnhancers"
+                            subpackage="Module" style="display:inline;">
+                        <f:form.submit class="neos-button neos-button-danger" value="Delete all"/>
+                    </f:form>
+                </div>
+
+            </div>
+        </f:then>
+        <f:else>
+            <p>There are no entries in the database.</p>
+        </f:else>
+    </f:if>
+
+</f:section>
