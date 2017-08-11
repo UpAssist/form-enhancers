@@ -7,3 +7,5 @@ TYPO3:
             implementationClassName: 'UpAssist\FormEnhancers\Finishers\EmailFinisher'
           'UpAssist.FormEnhancers:Redirect':
             implementationClassName: 'UpAssist\FormEnhancers\Finishers\NodeRedirectFinisher'
+          'UpAssist.FormEnhancers:StoreFormEntry':
+            implementationClassName: 'UpAssist\FormEnhancers\Finishers\FormEntryFinisher'
