@@ -62,7 +62,7 @@ class FormEntryController extends AbstractModuleController
     public function deleteAllAction() {
         $this->formEntryRepository->removeAll();
         $this->formEntryRepository->persistAll();
-        $message = new Message('All orders successfully removed');
+        $message = new Message('All entries successfully removed');
         $this->flashMessageContainer->addMessage($message);
         $this->redirect('index');
     }
