@@ -15,18 +15,22 @@ use TYPO3\Flow\Persistence\Repository;
 class FormEntryRepository extends Repository
 {
     /**
-     * @return object
-     */
-    public function getFirst() {
-        $query = $this->createQuery();
-        return $query->execute()->getFirst();
-    }
-
-    /**
      * Persist all
+     * @return void
      */
     public function persistAll()
     {
         $this->persistenceManager->persistAll();
+    }
+
+    /**
+     * @param string $formIdentifier
+     * @return void
+     */
+    public function removeAllByFormIdentifier($formIdentifier)
+    {
+        foreach ($this->findByFormIdentifier($formIdentifier) as $object) {
+            $this->remove($object);
+        }
     }
 }

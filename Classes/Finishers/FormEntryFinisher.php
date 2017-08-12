@@ -34,6 +34,7 @@ class FormEntryFinisher extends AbstractFinisher
 
         $entry = new FormEntry();
         $entry->setFormIdentifier($formRuntime->getIdentifier());
+        $entry->setFormLabel($this->parseOption('label'));
         $entry->setFormValues($formValues);
 
         $this->formEntryRepository->add($entry);

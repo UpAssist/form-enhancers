@@ -1,35 +1,43 @@
 <?php
+
 namespace UpAssist\FormEnhancers\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @Flow\Entity
  */
-class FormEntry {
-    /**
-     * @var string The formIdentifier as determined in the yaml
-     */
-   protected $formIdentifier;
+class FormEntry
+{
 
+    /**
+     * @var string The formIdentifier as defined in the yaml
+     */
+    protected $formIdentifier;
+
+    /**
+     * @var string The form label as defined in the yaml
+     */
+    protected $formLabel;
     /**
      * @var \DateTime The creation date time of the entry
      */
-   protected $creationDateTime;
+    protected $creationDateTime;
 
     /**
      * @ORM\Column(type="flow_json_array")
      * @var array<mixed> The formValues
      */
-   protected $formValues;
+    protected $formValues;
 
     /**
      * FormEntry constructor.
      */
     public function __construct()
-   {
-       $this->creationDateTime = new \DateTime();
-   }
+    {
+        $this->creationDateTime = new \DateTime();
+    }
 
     /**
      * @return string
@@ -47,6 +55,22 @@ class FormEntry {
     {
         $this->formIdentifier = $formIdentifier;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormLabel()
+    {
+        return $this->formLabel;
+    }
+
+    /**
+     * @param string $formLabel
+     */
+    public function setFormLabel($formLabel)
+    {
+        $this->formLabel = $formLabel;
     }
 
     /**

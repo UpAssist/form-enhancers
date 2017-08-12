@@ -25,23 +25,41 @@ class FormEntryController extends AbstractModuleController
     protected $formEntryRepository;
 
     /**
+     * @Flow\Inject(setting="formEntriesFinisher.forms", package="UpAssist.FormEnhancers")
+     * @var array
+     */
+    protected $formIdentifiers;
+
+    /**
      * @return  void
      */
     public function indexAction()
     {
         $this->formEntryRepository->setDefaultOrderings(['creationDateTime' => QueryInterface::ORDER_DESCENDING]);
-        $entries = $this->formEntryRepository->findAll();
-        $entry = $this->formEntryRepository->getFirst();
-        $entryLabels = [];
+        $forms = [];
+        // if formIdentifiers are defined, loop over them and assign them
+        if ($this->formIdentifiers) {
+            foreach ($this->formIdentifiers as $identifier) {
+                $entries = $this->formEntryRepository->findByFormIdentifier($identifier);
+                $entry = $entries[0];
+                $entryColumns = [];
 
-        if ($entry instanceof FormEntry) {
-            foreach ($entry->getFormValues() as $key => $value) {
-                $entryLabels[] = $key;
+                if ($entry instanceof FormEntry) {
+                    foreach ($entry->getFormValues() as $key => $value) {
+                        $entryColumns[] = $key;
+                    }
+                    $forms[] = [
+                        'formIdentifier' => $identifier,
+                        'label' => $entry->getFormLabel(),
+                        'columns' => $entryColumns,
+                        'entries' => $entries
+                    ];
+                }
+
             }
         }
 
-        $this->view->assign('labels', $entryLabels);
-        $this->view->assign('entries', $entries);
+        $this->view->assign('forms', $forms);
     }
 
     /**
@@ -57,10 +75,15 @@ class FormEntryController extends AbstractModuleController
     }
 
     /**
-     * @return void
+     * @param string $formIdentifier
+     * @return  void
      */
-    public function deleteAllAction() {
-        $this->formEntryRepository->removeAll();
+    public function deleteAllAction($formIdentifier = null) {
+        if ($formIdentifier) {
+            $this->formEntryRepository->removeAllByFormIdentifier($formIdentifier);
+        } else {
+            $this->formEntryRepository->removeAll();
+        }
         $this->formEntryRepository->persistAll();
         $message = new Message('All entries successfully removed');
         $this->flashMessageContainer->addMessage($message);
@@ -68,17 +91,20 @@ class FormEntryController extends AbstractModuleController
     }
 
     /**
+     * @param string $formIdentifier
      * @return void
      */
-    public function exportAction()
+    public function exportAction($formIdentifier = null)
     {
         require_once(Files::concatenatePaths([FLOW_PATH_PACKAGES, 'Libraries', 'os', 'php-excel', 'PHPExcel', 'PHPExcel.php']));
 
-        $singleEntry = $this->formEntryRepository->getFirst();
+        $this->formEntryRepository->setDefaultOrderings(['creationDateTime' => QueryInterface::ORDER_DESCENDING]);
+
+        $entries = $formIdentifier ? $this->formEntryRepository->findByFormIdentifier($formIdentifier) : $this->formEntryRepository->findAll();
         $columns = [];
 
-        if ($singleEntry instanceof FormEntry) {
-            foreach ($singleEntry->getFormValues() as $key => $value) {
+        if ($entries[0] instanceof FormEntry) {
+            foreach ($entries[0]->getFormValues() as $key => $value) {
                 $columns[] =[ucfirst($key), $key];
             }
         }
@@ -97,8 +123,7 @@ class FormEntryController extends AbstractModuleController
 
         $rowCounter = 2;
 
-        $this->formEntryRepository->setDefaultOrderings(['creationDateTime' => QueryInterface::ORDER_DESCENDING]);
-        foreach ($this->formEntryRepository->findAll() as $formEntry) {
+        foreach ($entries as $formEntry) {
             foreach ($columns as $column => $config) {
                 $cellValue = ObjectAccess::getPropertyPath($formEntry->getFormValues(), $config[1]) ? ObjectAccess::getPropertyPath($formEntry->getFormValues(), $config[1]) : ObjectAccess::getPropertyPath($formEntry, $config[1]);
 
@@ -121,11 +146,12 @@ class FormEntryController extends AbstractModuleController
         }
 
         // Rename sheet
-        $objPHPExcel->getActiveSheet()->setTitle('Form entries');
+        $objPHPExcel->getActiveSheet()->setTitle(substr($entries[0]->getFormLabel(), 0, 31));
 
+        $fileName = $formIdentifier ? $formIdentifier : 'form_entries';
         // Redirect output to a client’s web browser (Excel5)
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="form_entries.xls"');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xls"');
         header('Cache-Control: max-age=0');
 
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
