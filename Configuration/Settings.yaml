@@ -1,4 +1,4 @@
-TYPO3:
+Neos:
   Form:
     presets:
       default:
@@ -23,4 +23,4 @@ UpAssist:
   FormEnhancers:
     formEntriesFinisher:
       forms:
-        # - add formIdentifiers here
+         #- 'add formIdentifiers here'

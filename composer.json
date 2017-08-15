@@ -1,6 +1,6 @@
 {
   "name": "upassist/form-enhancers",
-  "type": "typo3-flow-package",
+  "type": "neos-flow-package",
   "license": "GPL-3.0+",
   "authors": [
     {

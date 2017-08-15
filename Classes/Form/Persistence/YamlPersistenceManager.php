@@ -2,16 +2,16 @@
 
 namespace UpAssist\FormEnhancers\Form\Persistence;
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Symfony\Component\Yaml\Yaml;
-use TYPO3\Flow\Configuration\ConfigurationManager;
-use TYPO3\Flow\Utility\Files;
+use Neos\Flow\Configuration\ConfigurationManager;
+use Neos\Utility\Files;
 
-class YamlPersistenceManager extends \TYPO3\Form\Persistence\YamlPersistenceManager
+class YamlPersistenceManager extends \Neos\Form\Persistence\YamlPersistenceManager
 {
 
     /**
-     * @var \TYPO3\Flow\Package\PackageManagerInterface
+     * @var \Neos\Flow\Package\PackageManagerInterface
      * @Flow\Inject
      */
     protected $packageManager;
@@ -27,7 +27,7 @@ class YamlPersistenceManager extends \TYPO3\Form\Persistence\YamlPersistenceMana
      */
     public function initializeObject()
     {
-        $settings = $this->configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'TYPO3.Form');
+        $settings = $this->configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'Neos.Form');
         $this->injectSettings($settings);
     }
 
@@ -59,7 +59,7 @@ class YamlPersistenceManager extends \TYPO3\Form\Persistence\YamlPersistenceMana
             return $globalPath;
         }
 
-        /** @var \TYPO3\Flow\Package\Package $package */
+        /** @var \Neos\Flow\Package\Package $package */
         foreach ($this->packageManager->getActivePackages() as $package) {
             $packageFormPath = 'resource://' . $package->getPackageKey() . '/Private/Forms/' . $formFileName;
             if (file_exists($packageFormPath)) {
@@ -78,7 +78,7 @@ class YamlPersistenceManager extends \TYPO3\Form\Persistence\YamlPersistenceMana
         $forms = array();
         $originalSavePath = $this->savePath;
 
-        /** @var \TYPO3\Flow\Package\Package $package */
+        /** @var \Neos\Flow\Package\Package $package */
         foreach ($this->packageManager->getActivePackages() as $package) {
             $this->savePath = 'resource://' . $package->getPackageKey() . '/Private/Forms';
 

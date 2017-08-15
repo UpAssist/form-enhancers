@@ -2,7 +2,7 @@
 
 namespace UpAssist\FormEnhancers\Domain\Model;
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +29,7 @@ class FormEntry
      * @ORM\Column(type="flow_json_array")
      * @var array<mixed> The formValues
      */
-    protected $formValues;
+    protected $formValues = [];
 
     /**
      * FormEntry constructor.

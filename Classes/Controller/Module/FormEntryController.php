@@ -6,12 +6,12 @@
 
 namespace UpAssist\FormEnhancers\Controller\Module;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Error\Message;
-use TYPO3\Flow\Persistence\QueryInterface;
-use TYPO3\Flow\Reflection\ObjectAccess;
-use TYPO3\Flow\Utility\Files;
-use TYPO3\Neos\Controller\Module\AbstractModuleController;
+use Neos\Error\Messages\Message;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\QueryInterface;
+use Neos\Neos\Controller\Module\AbstractModuleController;
+use Neos\Utility\Files;
+use Neos\Utility\ObjectAccess;
 use UpAssist\FormEnhancers\Domain\Model\FormEntry;
 use UpAssist\FormEnhancers\Domain\Repository\FormEntryRepository;
 
@@ -25,7 +25,7 @@ class FormEntryController extends AbstractModuleController
     protected $formEntryRepository;
 
     /**
-     * @Flow\Inject(setting="formEntriesFinisher.forms", package="UpAssist.FormEnhancers")
+     * @Flow\InjectConfiguration(path="formEntriesFinisher.forms", package="UpAssist.FormEnhancers")
      * @var array
      */
     protected $formIdentifiers;

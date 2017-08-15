@@ -2,15 +2,15 @@
 
 namespace UpAssist\FormEnhancers\Controller;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Controller\ActionController;
 
 class FormController extends ActionController
 {
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Form\Persistence\FormPersistenceManagerInterface
+     * @var \Neos\Form\Persistence\FormPersistenceManagerInterface
      */
     protected $formPersistenceManager;
 

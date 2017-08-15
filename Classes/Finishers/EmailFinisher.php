@@ -1,7 +1,7 @@
 <?php
 namespace UpAssist\FormEnhancers\Finishers;
 
-class EmailFinisher extends \TYPO3\Form\Finishers\EmailFinisher {
+class EmailFinisher extends \Neos\Form\Finishers\EmailFinisher {
 
     /**
      * Extends the functionality of the default parseOption() method

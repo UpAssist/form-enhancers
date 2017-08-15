@@ -2,21 +2,21 @@
 namespace UpAssist\FormEnhancers\ViewHelpers;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "TYPO3.Form".            *
+ * This script belongs to the Neos Flow package "Neos.Form".            *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
  * of the License, or (at your option) any later version.                 *
  *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
+ * The Neos project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Fluid\Core\ViewHelper;
+use Neos\FluidAdaptor\Core\ViewHelper\Exception;
 
 /**
  * @author support@simplyadmire.com
  */
-class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
+class FormViewHelper extends \Neos\Form\ViewHelpers\FormViewHelper {
 
 	/**
 	 * @return void
@@ -32,7 +32,7 @@ class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
 	 * Otherwise this creates the action URI using the UriBuilder
 	 *
 	 * @return string
-	 * @throws ViewHelper\Exception if the action URI could not be created
+	 * @throws Exception if the action URI could not be created
 	 */
 	protected function getFormActionUri() {
 		if ($this->formActionUri !== NULL) {
@@ -61,7 +61,7 @@ class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
 				$this->formActionUri = $uriBuilder
 					->uriFor($this->arguments['action'], $this->arguments['arguments'], $this->arguments['controller'], $this->arguments['package'], $this->arguments['subpackage']);
 			} catch (\Exception $exception) {
-				throw new ViewHelper\Exception($exception->getMessage(), $exception->getCode(), $exception);
+				throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
 			}
 		}
 		return $this->formActionUri;
