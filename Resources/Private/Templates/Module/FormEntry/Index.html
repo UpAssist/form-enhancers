@@ -2,10 +2,8 @@
   ~ Copyright (c) 2017. UpAssist
   ~ For more information http://www.upassist.com
   -->
+<div class="neos-content neos-container-fluid">
 
-<f:layout name="BackendModule"/>
-
-<f:section name="content">
     <f:if condition="{forms}">
         <f:then>
             <f:for each="{forms}" as="form">
@@ -51,7 +49,6 @@
                                 <f:form.submit value="Export" class="neos-button neos-button-primary"/>
                             </f:form>
                         </div>
-                        </div>
                     </f:then>
                     <f:else>
                         <p>There are no entries in the database.</p>
@@ -64,5 +61,4 @@
         </f:else>
     </f:if>
 
-
-</f:section>
+</div>
