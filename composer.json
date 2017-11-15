@@ -1,6 +1,6 @@
 {
   "name": "upassist/form-enhancers",
-  "type": "neos-flow-package",
+  "type": "neos-package",
   "license": "GPL-3.0+",
   "authors": [
     {
