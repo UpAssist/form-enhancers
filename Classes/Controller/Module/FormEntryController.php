@@ -6,6 +6,7 @@
 
 namespace UpAssist\FormEnhancers\Controller\Module;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Error\Message;
 use TYPO3\Flow\Persistence\QueryInterface;
@@ -96,7 +97,6 @@ class FormEntryController extends AbstractModuleController
      */
     public function exportAction($formIdentifier = null)
     {
-        require_once(Files::concatenatePaths([FLOW_PATH_PACKAGES, 'Libraries', 'os', 'php-excel', 'PHPExcel', 'PHPExcel.php']));
 
         $this->formEntryRepository->setDefaultOrderings(['creationDateTime' => QueryInterface::ORDER_DESCENDING]);
 
@@ -111,13 +111,13 @@ class FormEntryController extends AbstractModuleController
 
         array_push($columns, ['Created','creationDateTime']);
 
-        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel = new Spreadsheet();
         $objPHPExcel->setActiveSheetIndex(0);
 
         $rowCounter = 1;
         foreach ($columns as $column => $config) {
             $objPHPExcel->getActiveSheet()->setCellValue(chr(65 + $column) . $rowCounter, $config[0]);
-			$objPHPExcel->getActiveSheet()->getColumnDimension(\PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(TRUE);
+			$objPHPExcel->getActiveSheet()->getColumnDimension(\PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($column))->setAutoSize(TRUE);
         }
 
 
@@ -137,9 +137,9 @@ class FormEntryController extends AbstractModuleController
                 );
 
                 if (is_numeric($cellValue)) {
-                    $objPHPExcel->getActiveSheet()->getCell(chr(65 + $column) . $rowCounter)->setDataType(\PHPExcel_Cell_DataType::TYPE_NUMERIC);
+                    $objPHPExcel->getActiveSheet()->getCell(chr(65 + $column) . $rowCounter)->setDataType(\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
                 } else {
-                    $objPHPExcel->getActiveSheet()->getCell(chr(65 + $column) . $rowCounter)->setDataType(\PHPExcel_Cell_DataType::TYPE_STRING);
+                    $objPHPExcel->getActiveSheet()->getCell(chr(65 + $column) . $rowCounter)->setDataType(\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                 }
             }
             $rowCounter++;
@@ -149,13 +149,15 @@ class FormEntryController extends AbstractModuleController
         $objPHPExcel->getActiveSheet()->setTitle(substr($entries[0]->getFormLabel(), 0, 31));
 
         $fileName = $formIdentifier ? $formIdentifier : 'form_entries';
-        // Redirect output to a client’s web browser (Excel5)
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $fileName . '.xls"');
-        header('Cache-Control: max-age=0');
 
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        // Redirect output to a client’s web browser (Excel5)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xlsx');
+        ob_end_clean();
         $objWriter->save('php://output');
+
         exit();
     }
 

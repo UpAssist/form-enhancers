@@ -83,7 +83,6 @@ class NodeRedirectFinisher extends AbstractFinisher
         /** @var \TYPO3\Neos\Domain\Service\ContentContext $contentContext */
         $contentContext = $this->getContentContext($contextParameters);
         $node = $contentContext->getNode($this->parseOption('nodePath'));
-
         $uriBuilder = new UriBuilder();
         $uriBuilder->setRequest($this->finisherContext->getFormRuntime()->getRequest()->getMainRequest());
         $uri = $uriBuilder
