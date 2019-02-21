@@ -2,21 +2,22 @@
 namespace UpAssist\FormEnhancers\ViewHelpers;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "TYPO3.Form".            *
+ * This script belongs to the Neos Flow package "Neos.Form".            *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
  * of the License, or (at your option) any later version.                 *
  *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
+ * The Neos project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Fluid\Core\ViewHelper;
+use Neos\FluidAdaptor\Exception;
+
 
 /**
  * @author support@simplyadmire.com
  */
-class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
+class FormViewHelper extends \Neos\FluidAdaptor\ViewHelpers\FormViewHelper {
 
 	/**
 	 * @return void
@@ -26,14 +27,14 @@ class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
 		parent::initializeArguments();
 	}
 
-	/**
-	 * Returns the action URI of the form tag.
-	 * If the argument "actionUri" is specified, this will be returned
-	 * Otherwise this creates the action URI using the UriBuilder
-	 *
-	 * @return string
-	 * @throws ViewHelper\Exception if the action URI could not be created
-	 */
+    /**
+     * Returns the action URI of the form tag.
+     * If the argument "actionUri" is specified, this will be returned
+     * Otherwise this creates the action URI using the UriBuilder
+     *
+     * @return string
+     * @throws Exception
+     */
 	protected function getFormActionUri() {
 		if ($this->formActionUri !== NULL) {
 			return $this->formActionUri;
@@ -61,7 +62,7 @@ class FormViewHelper extends \TYPO3\Fluid\ViewHelpers\FormViewHelper {
 				$this->formActionUri = $uriBuilder
 					->uriFor($this->arguments['action'], $this->arguments['arguments'], $this->arguments['controller'], $this->arguments['package'], $this->arguments['subpackage']);
 			} catch (\Exception $exception) {
-				throw new ViewHelper\Exception($exception->getMessage(), $exception->getCode(), $exception);
+				throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
 			}
 		}
 		return $this->formActionUri;

@@ -3,24 +3,24 @@
 namespace UpAssist\FormEnhancers\Finishers;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "TYPO3.Form".            *
+ * This script belongs to the Neos Flow package "Neos.Form".            *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
  * of the License, or (at your option) any later version.                 *
  *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
+ * The Neos project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Routing\UriBuilder;
-use TYPO3\Flow\Utility\Arrays;
-use TYPO3\Form\Core\Model\AbstractFinisher;
-use TYPO3\Neos\Domain\Repository\DomainRepository;
-use TYPO3\Neos\Domain\Repository\SiteRepository;
-use TYPO3\Neos\Domain\Service\ContentContext;
-use TYPO3\Neos\Domain\Service\ContentContextFactory;
-use TYPO3\Neos\Service\LinkingService;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Routing\UriBuilder;
+use Neos\Form\Core\Model\AbstractFinisher;
+use Neos\Neos\Domain\Repository\DomainRepository;
+use Neos\Neos\Domain\Repository\SiteRepository;
+use Neos\Neos\Domain\Service\ContentContext;
+use Neos\Neos\Domain\Service\ContentContextFactory;
+use Neos\Neos\Service\LinkingService;
+use Neos\Utility\Arrays;
 
 /**
  * Class NodeRedirectFinisher
@@ -72,7 +72,7 @@ class NodeRedirectFinisher extends AbstractFinisher
      * @see AbstractFinisher::execute()
      *
      * @return void
-     * @throws \TYPO3\Form\Exception\FinisherException
+     * @throws \Neos\Flow\Mvc\Routing\Exception\MissingActionNameException
      */
     protected function executeInternal()
     {
@@ -80,7 +80,7 @@ class NodeRedirectFinisher extends AbstractFinisher
         /** @var array $contextParameters */
         $contextParameters = !empty($this->parseOption('dimensions')) ? ['dimensions' => $this->parseOption('dimensions')] : [];
 
-        /** @var \TYPO3\Neos\Domain\Service\ContentContext $contentContext */
+        /** @var \Neos\Neos\Domain\Service\ContentContext $contentContext */
         $contentContext = $this->getContentContext($contextParameters);
         $node = $contentContext->getNode($this->parseOption('nodePath'));
         $uriBuilder = new UriBuilder();
@@ -88,7 +88,7 @@ class NodeRedirectFinisher extends AbstractFinisher
         $uri = $uriBuilder
             ->reset()
             ->setCreateAbsoluteUri(TRUE)
-            ->uriFor('show', ['node' => $node], 'Frontend\Node', 'TYPO3.Neos');
+            ->uriFor('show', ['node' => $node], 'Frontend\Node', 'Neos.Neos');
 
         $delay = (integer)$this->parseOption('delay');
         $statusCode = $this->parseOption('statusCode');

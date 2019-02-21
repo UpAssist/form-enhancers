@@ -2,16 +2,17 @@
 
 namespace UpAssist\FormEnhancers\DataSource;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Neos\Service\DataSource\AbstractDataSource;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Form\Persistence\FormPersistenceManagerInterface;
+use Neos\Neos\Service\DataSource\AbstractDataSource;
 
 class FormsDataSource extends AbstractDataSource
 {
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Form\Persistence\FormPersistenceManagerInterface
+     * @var FormPersistenceManagerInterface
      */
     protected $formPersistenceManager;
 

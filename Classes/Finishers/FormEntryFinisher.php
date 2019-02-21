@@ -6,8 +6,8 @@
 
 namespace UpAssist\FormEnhancers\Finishers;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Form\Core\Model\AbstractFinisher;
+use Neos\Flow\Annotations as Flow;
+use Neos\Form\Core\Model\AbstractFinisher;
 use UpAssist\FormEnhancers\Domain\Model\FormEntry;
 use UpAssist\FormEnhancers\Domain\Repository\FormEntryRepository;
 

@@ -6,8 +6,8 @@
 
 namespace UpAssist\FormEnhancers\Domain\Repository;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Persistence\Repository;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\Repository;
 
 /**
  * @Flow\Scope("singleton")
@@ -26,6 +26,7 @@ class FormEntryRepository extends Repository
     /**
      * @param string $formIdentifier
      * @return void
+     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */
     public function removeAllByFormIdentifier($formIdentifier)
     {

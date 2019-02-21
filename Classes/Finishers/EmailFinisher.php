@@ -1,7 +1,7 @@
 <?php
 namespace UpAssist\FormEnhancers\Finishers;
 
-class EmailFinisher extends \TYPO3\Form\Finishers\EmailFinisher {
+class EmailFinisher extends \Neos\Form\Finishers\EmailFinisher {
 
     /**
      * Extends the functionality of the default parseOption() method
@@ -10,6 +10,7 @@ class EmailFinisher extends \TYPO3\Form\Finishers\EmailFinisher {
      *
      * @param string $optionName
      * @return mixed|string
+     * @throws \Neos\Flow\Mvc\Exception\NoSuchArgumentException
      */
     protected function parseOption($optionName) {
         $value = parent::parseOption($optionName);
