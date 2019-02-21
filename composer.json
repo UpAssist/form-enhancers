@@ -1,20 +1,25 @@
 {
-  "name": "upassist/form-enhancers",
-  "type": "typo3-flow-package",
-  "license": "GPL-3.0+",
-  "authors": [
-    {
-      "name": "Henjo Hoeksma",
-      "email": "henjo@upassist.com"
+    "name": "upassist/form-enhancers",
+    "type": "typo3-flow-package",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Henjo Hoeksma",
+            "email": "henjo@upassist.com"
+        }
+    ],
+    "require": {
+        "neos/form": "*",
+        "os/php-excel": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "UpAssist\\FormEnhancers\\": "Classes"
+        }
+    },
+    "extra": {
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
     }
-  ],
-  "require": {
-    "neos/form": "*",
-    "os/php-excel": "^2.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "UpAssist\\FormEnhancers\\": "Classes"
-    }
-  }
 }
