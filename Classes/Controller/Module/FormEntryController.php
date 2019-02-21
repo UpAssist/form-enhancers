@@ -6,13 +6,12 @@
 
 namespace UpAssist\FormEnhancers\Controller\Module;
 
+use Neos\Error\Messages\Message;
+use Neos\Flow\Persistence\QueryInterface;
+use Neos\Neos\Controller\Module\AbstractModuleController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Utility\ObjectAccess;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Error\Message;
-use TYPO3\Flow\Persistence\QueryInterface;
-use TYPO3\Flow\Reflection\ObjectAccess;
-use TYPO3\Flow\Utility\Files;
-use TYPO3\Neos\Controller\Module\AbstractModuleController;
 use UpAssist\FormEnhancers\Domain\Model\FormEntry;
 use UpAssist\FormEnhancers\Domain\Repository\FormEntryRepository;
 
@@ -66,6 +65,7 @@ class FormEntryController extends AbstractModuleController
     /**
      * @param FormEntry $formEntry
      * @return void
+     * @throws \Neos\Flow\Mvc\Exception\StopActionException
      */
     public function deleteAction(FormEntry $formEntry) {
         $this->formEntryRepository->remove($formEntry);
@@ -78,6 +78,7 @@ class FormEntryController extends AbstractModuleController
     /**
      * @param string $formIdentifier
      * @return  void
+     * @throws \Neos\Flow\Mvc\Exception\StopActionException
      */
     public function deleteAllAction($formIdentifier = null) {
         if ($formIdentifier) {

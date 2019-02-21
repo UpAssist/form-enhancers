@@ -10,7 +10,7 @@
     ],
     "require": {
         "neos/form": "*",
-        "os/php-excel": "^2.1"
+        "phpoffice/phpspreadsheet": "*"
     },
     "autoload": {
         "psr-4": {
