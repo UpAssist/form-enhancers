@@ -25,7 +25,7 @@ class FormEntryController extends AbstractModuleController
     protected $formEntryRepository;
 
     /**
-     * @Flow\Inject(setting="formEntriesFinisher.forms", package="UpAssist.FormEnhancers")
+     * @Flow\InjectConfiguration(path="formEntriesFinisher.forms", package="UpAssist.FormEnhancers")
      * @var array
      */
     protected $formIdentifiers;
@@ -66,6 +66,7 @@ class FormEntryController extends AbstractModuleController
      * @param FormEntry $formEntry
      * @return void
      * @throws \Neos\Flow\Mvc\Exception\StopActionException
+     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */
     public function deleteAction(FormEntry $formEntry) {
         $this->formEntryRepository->remove($formEntry);
@@ -79,6 +80,7 @@ class FormEntryController extends AbstractModuleController
      * @param string $formIdentifier
      * @return  void
      * @throws \Neos\Flow\Mvc\Exception\StopActionException
+     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */
     public function deleteAllAction($formIdentifier = null) {
         if ($formIdentifier) {
@@ -95,6 +97,8 @@ class FormEntryController extends AbstractModuleController
     /**
      * @param string $formIdentifier
      * @return void
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function exportAction($formIdentifier = null)
     {
