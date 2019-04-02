@@ -8,17 +8,17 @@
 <div class="neos-content neos-container-fluid">
     <f:render partial="Module/FlashMessages" />
 
-    <f:form.validationResults>
-        <f:if condition="{validationResults.flattenedErrors}">
+    <f:validation.results>
+        <f:if condition="{validation.results.flattenedErrors}">
             <ul class="neos-error">
-                <f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
+                <f:for each="{validation.results.flattenedErrors}" key="propertyPath" as="errors">
                     <li>
                         <f:for each="{errors}" as="error">{neos:backend.translate(id: error.code, source: 'ValidationErrors', arguments: error.arguments, value: error)}</f:for>
                     </li>
                 </f:for>
             </ul>
         </f:if>
-    </f:form.validationResults>
+    </f:validation.results>
 
 
     <f:if condition="{forms}">
