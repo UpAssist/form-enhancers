@@ -21,6 +21,11 @@ use Neos\FluidAdaptor\Exception;
  */
 class ActionViewHelper extends AbstractTagBasedViewHelper {
 
+    /**
+     * @var boolean
+     */
+    protected $escapeOutput = FALSE;
+
 	/**
 	 * @var string
 	 */

@@ -14,10 +14,11 @@ namespace UpAssist\FormEnhancers\ViewHelpers;
 use Neos\FluidAdaptor\Exception;
 
 
-/**
- * @author support@simplyadmire.com
- */
 class FormViewHelper extends \Neos\FluidAdaptor\ViewHelpers\FormViewHelper {
+    /**
+     * @var boolean
+     */
+    protected $escapeOutput = FALSE;
 
 	/**
 	 * @return void
