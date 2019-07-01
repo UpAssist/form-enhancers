@@ -15,7 +15,7 @@ class EmailFinisher extends \Neos\Form\Finishers\EmailFinisher {
     protected function parseOption($optionName) {
         $value = parent::parseOption($optionName);
 
-        if (substr($value, 0, 16) === 'fieldIdentifier:') {
+        if (!is_array($value) && substr($value, 0, 16) === 'fieldIdentifier:') {
             $formRuntime = $this->finisherContext->getFormRuntime();
             $field = str_replace('fieldIdentifier:', '', $value);
             if ($formRuntime->getRequest()->hasArgument($field)) {
