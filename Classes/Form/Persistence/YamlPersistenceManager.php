@@ -64,7 +64,7 @@ class YamlPersistenceManager extends \Neos\Form\Persistence\YamlPersistenceManag
         }
 
         /** @var \Neos\Flow\Package\Package $package */
-        foreach ($this->packageManager->getActivePackages() as $package) {
+        foreach ($this->packageManager->getAvailablePackages() as $package) {
             $packageFormPath = 'resource://' . $package->getPackageKey() . '/Private/Forms/' . $formFileName;
             if (file_exists($packageFormPath)) {
                 return $packageFormPath;
@@ -83,7 +83,7 @@ class YamlPersistenceManager extends \Neos\Form\Persistence\YamlPersistenceManag
         $originalSavePath = $this->savePath;
 
         /** @var \Neos\Flow\Package\Package $package */
-        foreach ($this->packageManager->getActivePackages() as $package) {
+        foreach ($this->packageManager->getAvailablePackages() as $package) {
             $this->savePath = 'resource://' . $package->getPackageKey() . '/Private/Forms';
 
             if (!is_dir($this->savePath)) {
