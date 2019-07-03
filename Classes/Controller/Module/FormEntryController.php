@@ -160,7 +160,7 @@ class FormEntryController extends AbstractModuleController
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
         header('Cache-Control: max-age=0');
         $objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xlsx');
-        ob_end_clean();
+        if (ob_get_length()) ob_end_clean();
         $objWriter->save('php://output');
 
         exit();
