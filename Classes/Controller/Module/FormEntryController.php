@@ -116,7 +116,7 @@ class FormEntryController extends AbstractModuleController
 
         $rowCounter = 1;
         foreach ($columns as $column => $config) {
-            $objPHPExcel->getActiveSheet()->setCellValue(chr(65 + $column) . $rowCounter, $config[0]);
+            $objPHPExcel->getActiveSheet()->setCellValueBy(chr(65 + $column) . $rowCounter, $config[0]);
 			$objPHPExcel->getActiveSheet()->getColumnDimension(\PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(TRUE);
         }
 
