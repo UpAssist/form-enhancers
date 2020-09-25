@@ -19,8 +19,6 @@ Neos:
             description: 'Form entries'
             icon: icon-table
             privilegeTarget: 'UpAssist.FormEnhancers:ModuleControllerActions'
-UpAssist:
-  FormEnhancers:
-    formEntriesFinisher:
-      forms:
-        # - add formIdentifiers here
+    fusion:
+      autoInclude:
+        'UpAssist.FormEnhancers': true

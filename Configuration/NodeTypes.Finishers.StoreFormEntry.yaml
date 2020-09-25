@@ -1,0 +1,14 @@
+'UpAssist.FormEnhancers:StoreFormEntryFinisher':
+  superTypes:
+    'Neos.Form.Builder:AbstractFinisher': TRUE
+  ui:
+    label: 'Save Form Entry Finisher'
+    icon: 'icon-paperclip'
+    inspector:
+      groups:
+        'finisher':
+          icon: 'icon-envelope-o'
+        'finisher-attachments':
+          label: i18n
+          position: 40
+          icon: 'icon-paperclip'

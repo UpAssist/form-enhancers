@@ -1,0 +1,3 @@
+prototype(UpAssist.FormEnhancers:StoreFormEntryFinisher.Definition) < prototype(Neos.Form.Builder:Finisher.Definition) {
+  formElementType = 'UpAssist.FormEnhancers:StoreFormEntry'
+}
