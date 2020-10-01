@@ -24,10 +24,6 @@ class FormEntryController extends AbstractModuleController
    */
   protected $formEntryRepository;
 
-  public function __construct()
-  {
-  }
-
   /**
    * @return  void
    */
@@ -142,6 +138,10 @@ class FormEntryController extends AbstractModuleController
 
         if ($cellValue instanceof \DateTime) {
           $cellValue = $cellValue->format('d-m-Y H:i');
+        }
+
+        if ($cellValue === NULL) {
+          $cellValue = '';
         }
 
         $objPHPExcel->getActiveSheet()->setCellValue(
