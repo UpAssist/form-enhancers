@@ -4,7 +4,7 @@ namespace UpAssist\FormEnhancers\Form\Persistence;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Configuration\ConfigurationManager;
-use Neos\Flow\Package\PackageManagerInterface;
+use Neos\Flow\Package\PackageManager;
 use Neos\Utility\Files;
 use Symfony\Component\Yaml\Yaml;
 
@@ -12,7 +12,7 @@ class YamlPersistenceManager extends \Neos\Form\Persistence\YamlPersistenceManag
 {
 
     /**
-     * @var PackageManagerInterface
+     * @var PackageManager
      * @Flow\Inject
      */
     protected $packageManager;

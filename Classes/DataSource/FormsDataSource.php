@@ -28,7 +28,7 @@ class FormsDataSource extends AbstractDataSource
      * @param array $arguments Additional arguments (key / value)
      * @return array JSON serializable data
      */
-    public function getData(NodeInterface $node = NULL, array $arguments)
+    public function getData(NodeInterface $node = NULL, array $arguments = [])
     {
         $forms = $this->formPersistenceManager->listForms();
         $formIdentifiers = array();
