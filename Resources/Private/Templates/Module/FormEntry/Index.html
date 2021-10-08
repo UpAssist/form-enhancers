@@ -40,8 +40,9 @@
                             <f:for each="{form.entries}" as="entry">
                                 <tr>
                                     <td>
-                                        <f:form action="delete" controller="FormEntry" package="UpAssist/FormEnhancers"
-                                                subpackage="Module" arguments="{formEntry:entry}">
+                                        <f:form action="delete" controller="Module\FormEntry"
+                                                package="UpAssist.FormEnhancers"
+                                                arguments="{formEntry:entry}">
                                             <f:form.submit class="neos-button neos-button-danger" value="Delete"/>
                                         </f:form>
                                     </td>
@@ -54,13 +55,13 @@
                         </table>
 
                         <div class="neos-button-toolbar">
-                            <f:form action="deleteAll" controller="FormEntry" package="UpAssist/FormEnhancers"
-                                    subpackage="Module" style="display:inline;">
+                            <f:form action="deleteAll" controller="Module\FormEntry"
+                                    style="display:inline;">
                                 <f:form.hidden name="formIdentifier" value="{form.formIdentifier}" />
                                 <f:form.submit class="neos-button neos-button-danger" value="Delete all"/>
                             </f:form>
 
-                            <f:form action="export" controller="FormEntry" subpackage="Module" package="UpAssist/FormEnhancers" format="xls"
+                            <f:form action="export" controller="Module\FormEntry" format="xls"
                                     style="display:inline; float: right;">
                                 <f:form.hidden name="formIdentifier" value="{form.formIdentifier}" />
                                 <f:form.submit value="Export" class="neos-button neos-button-primary"/>

@@ -68,8 +68,7 @@ class FormEntryController extends AbstractModuleController
   {
     $this->formEntryRepository->remove($formEntry);
     $this->formEntryRepository->persistAll();
-    $message = new Message('The entry is successfully removed');
-    $this->flashMessageContainer->addMessage($message);
+    $this->addFlashMessage('The entry is successfully removed');
     $this->redirect('index');
   }
 
@@ -87,8 +86,7 @@ class FormEntryController extends AbstractModuleController
       $this->formEntryRepository->removeAll();
     }
     $this->formEntryRepository->persistAll();
-    $message = new Message('All entries successfully removed');
-    $this->flashMessageContainer->addMessage($message);
+    $this->addFlashMessage('All entries successfully removed');
     $this->redirect('index');
   }
 
