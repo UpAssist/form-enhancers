@@ -69,10 +69,10 @@ class NodeRedirectFinisher extends AbstractFinisher
 
     /**
      * Executes this finisher
-     * @see AbstractFinisher::execute()
-     *
-     * @return void
+     * @return \Neos\Flow\Mvc\ActionResponse
      * @throws \Neos\Flow\Mvc\Routing\Exception\MissingActionNameException
+     *@see AbstractFinisher::execute()
+     *
      */
     protected function executeInternal()
     {
@@ -98,12 +98,12 @@ class NodeRedirectFinisher extends AbstractFinisher
         $response = $this->finisherContext->getFormRuntime()->getResponse();
         $mainResponse = $response;
         $mainResponse->setContent('<html><head><meta http-equiv="refresh" content="' . $delay . ';url=' . $escapedUri . '"/></head></html>');
-        $mainResponse->setStatus($statusCode);
+        $mainResponse->setStatusCode($statusCode);
         if ($delay === 0) {
-            $mainResponse->setHeader('Location', (string)$uri);
+            $mainResponse->setHttpHeader('Location', $uri);
         }
 
-        $mainResponse->send();
+        return $mainResponse;
     }
 
     /**
