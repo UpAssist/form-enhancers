@@ -1,0 +1,9 @@
+'Neos.NodeTypes.Form:Form':
+  properties:
+    formIdentifier:
+      ui:
+        inspector:
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            placeholder: 'Select the Form identifier'
+            dataSourceIdentifier: upassist-formenhancers
