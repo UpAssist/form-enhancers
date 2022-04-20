@@ -10,7 +10,8 @@
     ],
     "require": {
         "neos/form": "*",
-        "phpoffice/phpspreadsheet": "*"
+        "phpoffice/phpspreadsheet": "*",
+        "neos/form-builder": "*"
     },
     "autoload": {
         "psr-4": {
