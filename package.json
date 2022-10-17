@@ -1,6 +1,6 @@
 {
     "name": "upassist-formenhancers",
-    "version": "7.3.0",
+    "version": "8.0.0",
     "main": "index.js",
     "repository": "git@gitlab.com:upassist/form-enhancers.git",
     "author": "Henjo Hoeksma <henjo@upassist.com>",
